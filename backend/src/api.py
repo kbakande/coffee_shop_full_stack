@@ -46,7 +46,6 @@ def getDrinkDetails(payload):
 @requires_auth("post:drinks")
 def add_drinks(payload):
     body = request.get_json()
-    print(body)
     drink_title = body.get('title', None)
     drink_recipe = body.get('recipe', None)
     if not drink_title or not drink_recipe:
@@ -56,7 +55,6 @@ def add_drinks(payload):
             'message': 'Title and recipe must be submitted.'
         }), 400
     drink = Drink(title=drink_title, recipe=json.dumps(drink_recipe))
-    print(drink)
     try:
             drink.insert()
             return jsonify({
